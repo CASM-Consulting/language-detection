@@ -3,17 +3,14 @@ package com.cybozu.labs.langdetect;
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.Character.UnicodeBlock;
-import java.util.ArrayList;
-import java.util.Formatter;
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 import java.util.regex.Pattern;
 
 import com.cybozu.labs.langdetect.util.NGram;
 
 /**
  * {@link Detector} class is to detect language from specified text. 
- * Its instance is able to be constructed via the factory class {@link DetectorFactory}.
+ * Its instance is able to be constructed via the factory class {@link DetectorFactorySingleton}.
  * <p>
  * After appending a target text to the {@link Detector} instance with {@link #append(Reader)} or {@link #append(String)},
  * the detector provides the language detection results for target text via {@link #detect()} or {@link #getProbabilities()}.
@@ -26,20 +23,20 @@ import com.cybozu.labs.langdetect.util.NGram;
  * <pre>
  * import java.util.ArrayList;
  * import com.cybozu.labs.langdetect.Detector;
- * import com.cybozu.labs.langdetect.DetectorFactory;
+ * import com.cybozu.labs.langdetect.DetectorFactorySingleton;
  * import com.cybozu.labs.langdetect.Language;
  * 
  * class LangDetectSample {
  *     public void init(String profileDirectory) throws LangDetectException {
- *         DetectorFactory.loadProfile(profileDirectory);
+ *         DetectorFactorySingleton.loadProfile(profileDirectory);
  *     }
  *     public String detect(String text) throws LangDetectException {
- *         Detector detector = DetectorFactory.create();
+ *         Detector detector = DetectorFactorySingleton.create();
  *         detector.append(text);
  *         return detector.detect();
  *     }
  *     public ArrayList<Language> detectLangs(String text) throws LangDetectException {
- *         Detector detector = DetectorFactory.create();
+ *         Detector detector = DetectorFactorySingleton.create();
  *         detector.append(text);
  *         return detector.getProbabilities();
  *     }
@@ -51,7 +48,7 @@ import com.cybozu.labs.langdetect.util.NGram;
  * </ul>
  * 
  * @author Nakatani Shuyo
- * @see DetectorFactory
+ * @see DetectorFactorySingleton
  */
 public class Detector {
     
@@ -67,8 +64,8 @@ public class Detector {
     private static final Pattern URL_REGEX = Pattern.compile("https?://[-_.?&~;+=/#0-9A-Za-z]{1,2076}");
     private static final Pattern MAIL_REGEX = Pattern.compile("[-_.0-9A-Za-z]{1,64}@[-_0-9A-Za-z]{1,255}[-_.0-9A-Za-z]{1,255}");
     
-    private final HashMap<String, double[]> wordLangProbMap;
-    private final ArrayList<String> langlist;
+    private final Map<String, double[]> wordLangProbMap;
+    private final List<String> langlist;
 
     private StringBuffer text;
     private double[] langprob = null;
@@ -82,33 +79,39 @@ public class Detector {
 
     /**
      * Constructor.
-     * Detector instance can be constructed via {@link DetectorFactory#create()}.
-     * @param factory {@link DetectorFactory} instance (only DetectorFactory inside)
+     * Detector instance can be constructed via {@link DetectorFactorySingleton#create()}.
+     * @param factory {@link DetectorFactorySingleton} instance (only DetectorFactorySingleton inside)
      */
-    public Detector(DetectorFactory factory) {
-        //TODO benchmark if we save anything by having array instead of the 
-        //list here.
+    public Detector(DetectorFactorySingleton factory) {
         this.wordLangProbMap = factory.wordLangProbMap;
         this.langlist = factory.langlist;
-        this.text = new StringBuffer();
         this.seed  = factory.seed;
+        this.text = new StringBuffer();
     }
 
     /**
      * Constructor.
+     * Detector instance can be constructed via {@link DetectorFactory#create()}.
+     * @param factory {@link DetectorFactorySingleton} instance (only DetectorFactorySingleton inside)
+     */
+    public Detector(DetectorFactory factory) {
+        this.wordLangProbMap = factory.wordLangProbMap;
+        this.langlist = factory.langlist;
+        this.seed  = factory.seed;
+        this.text = new StringBuffer();
+    }
+
+    /**
+     *
      * @param wordLangProbMap
      * @param langlist
      * @param seed
      */
-    public Detector(
-            HashMap<String, double[]> wordLangProbMap,
-            ArrayList<String> langlist,
-            Long seed) {
+    public Detector(Map<String, double[]> wordLangProbMap, List<String> langlist, Long seed) {
         this.wordLangProbMap = wordLangProbMap;
         this.langlist = langlist;
-        this.text = new StringBuffer();
         this.seed = seed;
-        
+        this.text = new StringBuffer();
     }
     
     /**

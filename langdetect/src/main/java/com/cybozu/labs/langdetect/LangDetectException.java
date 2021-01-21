@@ -20,7 +20,7 @@ public class LangDetectException extends Exception {
     /**
      * @param code
      * @param message
-     * @param cause nested exception.
+     * @param e nested exception.
      */
     public LangDetectException(
             ErrorCode code, String message, Exception e) {

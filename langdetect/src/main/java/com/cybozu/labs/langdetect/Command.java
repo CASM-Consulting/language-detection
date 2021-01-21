@@ -104,9 +104,9 @@ public class Command {
     private boolean loadProfile() {
         String profileDirectory = get("directory") + "/"; 
         try {
-            DetectorFactory.loadProfile(profileDirectory);
+            DetectorFactorySingleton.loadProfile(profileDirectory);
             Long seed = getLong("seed");
-            if (seed != null) DetectorFactory.setSeed(seed);
+            if (seed != null) DetectorFactorySingleton.setSeed(seed);
             return false;
         } catch (LangDetectException e) {
             System.err.println("ERROR: " + e.getMessage());
@@ -139,11 +139,7 @@ public class Command {
                 File profile_path = new File(get("directory") + "/profiles/" + lang);
                 os = new FileOutputStream(profile_path);
                 JSON.encode(profile, os);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (LangDetectException e) {
+            } catch (JSONException | IOException | LangDetectException e) {
                 e.printStackTrace();
             } finally {
                 try {
@@ -186,9 +182,7 @@ public class Command {
             File profile_path = new File(lang);
             os = new FileOutputStream(profile_path);
             JSON.encode(profile, os);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (JSONException | IOException e) {
             e.printStackTrace();
         } catch (LangDetectException e) {
             e.printStackTrace();
@@ -214,13 +208,11 @@ public class Command {
             try {
                 is = new BufferedReader(new InputStreamReader(new FileInputStream(filename), "utf-8"));
 
-                Detector detector = DetectorFactory.create(getDouble("alpha", DEFAULT_ALPHA));
+                Detector detector = DetectorFactorySingleton.create(getDouble("alpha", DEFAULT_ALPHA));
                 if (hasOpt("--debug")) detector.setVerbose();
                 detector.append(is);
                 System.out.println(filename + ":" + detector.getProbabilities());
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (LangDetectException e) {
+            } catch (IOException | LangDetectException e) {
                 e.printStackTrace();
             } finally {
                 try {
@@ -258,7 +250,7 @@ public class Command {
                     String correctLang = line.substring(0, idx);
                     String text = line.substring(idx + 1);
                     
-                    Detector detector = DetectorFactory.create(getDouble("alpha", DEFAULT_ALPHA));
+                    Detector detector = DetectorFactorySingleton.create(getDouble("alpha", DEFAULT_ALPHA));
                     detector.append(text);
                     String lang = "";
                     try {
@@ -271,9 +263,7 @@ public class Command {
                     if (hasOpt("--debug")) System.out.println(correctLang + "," + lang + "," + (text.length()>100?text.substring(0, 100):text));
                 }
                 
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (LangDetectException e) {
+            } catch (IOException | LangDetectException e) {
                 e.printStackTrace();
             } finally {
                 try {

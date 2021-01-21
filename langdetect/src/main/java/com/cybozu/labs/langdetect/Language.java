@@ -3,7 +3,7 @@ package com.cybozu.labs.langdetect;
 
 /**
  * {@link Language} is to store the detected language.
- * {@link Detector#getProbabilities()} returns an {@link ArrayList} of {@link Language}s.
+ * {@link Detector#getProbabilities()} returns an {@link java.util.ArrayList} of {@link Language}s.
  *  
  * @see Detector#getProbabilities()
  * @author Nakatani Shuyo
