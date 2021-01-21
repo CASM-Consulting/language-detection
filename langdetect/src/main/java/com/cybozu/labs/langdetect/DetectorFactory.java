@@ -15,16 +15,13 @@ import java.util.List;
 /**
  * Language Detector Factory Class
  * 
- * This class manages an initialization and constructions of {@link Detector}. 
- * 
- * Before using language detection library, 
- * load profiles with {@link DetectorFactory#loadProfile(String)} method
- * and set initialization parameters.
- * 
- * When the language detection,
- * construct Detector instance via {@link DetectorFactory#create()}.
- * See also {@link Detector}'s sample code.
- * 
+ * This class manages an initialization and constructions of {@link Detector}.
+ *
+ * Note: This class replicates the behaviour of the old DetectorFactory (now DetectorFactorySingleton)
+ * but without the use of a globally modifiable singleton to configure Detectors. Previous implementation
+ * did not play nice if you ever want more than one language detector with different configurations
+ * in the same JVM...
+ *
  * <ul>
  * <li>4x faster improvement based on Elmer Garduno's code. Thanks!</li>
  * </ul>
@@ -156,6 +153,19 @@ public class DetectorFactory {
      */
     public Detector create() throws LangDetectException {
         return createDetector();
+    }
+
+    /**
+     * Construct Detector instance with initial text
+     *
+     * @param text to detect
+     * @return Detector instance
+     * @throws LangDetectException
+     */
+    public Detector create(String text) throws LangDetectException {
+        Detector detector = createDetector();
+        detector.append(text);
+        return detector;
     }
 
     /**

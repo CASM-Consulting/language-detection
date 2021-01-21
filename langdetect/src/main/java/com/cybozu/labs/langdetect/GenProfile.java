@@ -29,7 +29,7 @@ public class GenProfile {
      * @param lang target language name
      * @param file target database file path
      * @return Language profile instance
-     * @throws LangDetectException 
+     * @throws LangDetectException if the training data can not be opened or parsed
      */
     public static LangProfile loadFromWikipediaAbstract(String lang, File file) throws LangDetectException {
 
