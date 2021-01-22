@@ -163,58 +163,20 @@
           <!--</execution>-->
         <!--</executions>-->
       <!--</plugin>-->
-      <plugin>
-        <groupId>org.sonatype.plugins</groupId>
-        <artifactId>nexus-staging-maven-plugin</artifactId>
-        <version>1.6.3</version>
-        <extensions>true</extensions>
-        <configuration>
-          <serverId>ossrh</serverId>
-          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-          <autoReleaseAfterClose>false</autoReleaseAfterClose>
-        </configuration>
-      </plugin>    
+      <!--<plugin>-->
+        <!--<groupId>org.sonatype.plugins</groupId>-->
+        <!--<artifactId>nexus-staging-maven-plugin</artifactId>-->
+        <!--<version>1.6.3</version>-->
+        <!--<extensions>true</extensions>-->
+        <!--<configuration>-->
+          <!--<serverId>ossrh</serverId>-->
+          <!--<nexusUrl>https://oss.sonatype.org/</nexusUrl>-->
+          <!--<autoReleaseAfterClose>false</autoReleaseAfterClose>-->
+        <!--</configuration>-->
+      <!--</plugin>    -->
     </plugins>
   </build>
 
-  <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-    <repository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>    
-  </distributionManagement>
-  
-  
-  <description>This project is a fork of the
-    &quot;language-detection&quot; project hosted on Google Code by 
-    Nakatani Shuyo at Cybozu Labs, Inc.  
-    Original project web site: https://code.google.com/p/language-detection/
-    This port cleans it up a bit and modify it to mavenize it.
-  </description>
-  <scm>
-  	<url>https://github.com/Norconex/language-detection</url>
-  	<connection>scm:git:git@github.com:Norconex/language-detection.git</connection>
-  	<developerConnection>scm:git:git@github.com:Norconex/language-detection.git</developerConnection>
-  </scm>
-  <issueManagement>
-  	<system>GitHub</system>
-  	<url>https://github.com/Norconex/language-detection/issues</url>
-  </issueManagement>
-
-  <developers>
-    <developer>
-        <id>essiembre</id>
-        <name>Pascal Essiembre</name>
-        <email>pascal.essiembre@norconex.com</email>
-        <organization>Norconex Inc.</organization>
-        <organizationUrl>http://www.norconex.com</organizationUrl>
-        <timezone>-4</timezone>
-    </developer>
-  </developers>
   <contributors>
   </contributors>
 
