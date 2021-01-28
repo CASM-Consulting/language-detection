@@ -319,6 +319,9 @@ public class Command {
             command.detectLang();
         } else if (command.hasOpt("--batchtest")) {
             command.batchTest();
+        } else {
+            System.out.println("Invalid command args: must be one of '--genprofile'" +
+                    ", '--genprofile-text', '--detectlang', or '--batchtest");
         }
     }
 
