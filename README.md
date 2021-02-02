@@ -1,13 +1,14 @@
 language-detection
 ==================
 
- - Fork of the Shuyo "language-detection" project hosted on Google Code. 
- - Original project web site: https://code.google.com/p/language-detection/.
- - Forked from a mavenised version by Norconex: https://github.com/Norconex/language-detection/
+Forked from Norconex's [mavenised version](https://github.com/Norconex/language-detection) of Shuyo's ["language-detection" project](https://github.com/shuyo/language-detection/blob/wiki/ProjectHome.md) 
 
-Modified to allow multiple language profiles to be configured within the same JVM.
+#### Changes:
+ - Modified to allow multiple language profiles to be configured within the same JVM.
+ - Moved to 2.0.0 to as `DetectorFactory` API is not back-compat
 
-Maven Dependency:
+
+#### Maven Dependency:
 
 ```xml
 <dependency>
