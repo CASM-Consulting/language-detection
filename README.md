@@ -13,6 +13,6 @@ Maven Dependency:
 <dependency>
   <groupId>uk.ac.susx.tag</groupId>
   <artifactId>langdetect</artifactId>
-  <version>1.4.0</version>
+  <version>2.0.1</version>
 </dependency>
 ```
