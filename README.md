@@ -3,6 +3,16 @@ language-detection
 
 Forked from Norconex's [mavenised version](https://github.com/Norconex/language-detection) of Shuyo's ["language-detection" project](https://github.com/shuyo/language-detection/blob/wiki/ProjectHome.md) 
 
+#### Maven Dependency:
+
+```xml
+<dependency>
+  <groupId>uk.ac.susx.tag</groupId>
+  <artifactId>langdetect</artifactId>
+  <version>2.0.1</version>
+</dependency>
+```
+
 #### Changes:
 
 ##### v2.0.0 (2021-02-01)
@@ -20,12 +30,4 @@ Forked from Norconex's [mavenised version](https://github.com/Norconex/language-
 - Added DetectorFactory#loadProfile(InputStream)
 - Minor tweaks.
 
-#### Maven Dependency:
 
-```xml
-<dependency>
-  <groupId>uk.ac.susx.tag</groupId>
-  <artifactId>langdetect</artifactId>
-  <version>2.0.1</version>
-</dependency>
-```
