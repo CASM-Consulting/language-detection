@@ -7,13 +7,13 @@
   <artifactId>langdetect</artifactId>
   <version>2.0.1</version>
 
-  <!-- Deployment --> 
-  <parent>
-    <groupId>uk.ac.susx.tag</groupId>
-    <artifactId>tag-dist</artifactId>
-    <version>1.0.9</version>
-    <relativePath>../tag-dist/pom.xml</relativePath>
-  </parent>
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub CASM-Consulting Apache Maven Packages</name>
+      <url>https://maven.pkg.github.com/CASM-Consulting/method52</url>
+    </repository>
+  </distributionManagement>
 
   <packaging>jar</packaging>
 
